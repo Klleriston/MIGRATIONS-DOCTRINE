@@ -6,14 +6,12 @@ use Alura\Doctrine\Entity\Student;
 use Alura\Doctrine\Helper\EntityManagerCreator;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-
 $studentClass = Student::class;
 $entityManager = EntityManagerCreator::createEntityManager();
-$dql = "SELECT student FROM $studentClass student";
 
+$studentRepository = $entityManager->getRepository(Student::class);
+$studentList = $studentRepository->studentAndCourses();
 
-/** @var Student[] $studentList */
-$studentList = $entityManager->createQuery($dql)->getResult();
 
 
 foreach ($studentList as $student) {
